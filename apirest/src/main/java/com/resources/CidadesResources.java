@@ -87,4 +87,10 @@ public class CidadesResources {
     public Cidades pegaCidadesPorEstado(@RequestBody Cidades cidades){
         return (Cidades) cidadesRepository.findAll(cidades.getUf());
     }
+
+    //Soma de todos os campos da tabela
+    @GetMapping("/somaTabela")
+    public Integer somaTabela(){
+        return cidadesRepository.somaTabela();
+    }
 }

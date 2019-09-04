@@ -44,6 +44,20 @@ public interface CidadesRepository extends JpaRepository<Cidades, Long> {
         return novaLista;
     }
 
+    //Numero de colunas
+    @Query("select count(*) from information_schema.Columns Where Table_Name='tb_cidades'")
+    int colunas();
+
+    //Numero de linhas
+    @Query("select count(*) from tb_cidades")
+    int linhas();
+
+    //Soma de todos os campos da tabela
+    public default Integer somaTabela(){
+        int total = (colunas() * linhas());
+        return total;
+    }
+
     //Carrega arquivo CSV e persiste no banco
     public default <CSVReader> String[][] carregaCidades(String arquivo) throws IOException {
         String arquivoCSV = arquivo;
